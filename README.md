@@ -1,3 +1,3 @@
-# livingzie
-RS485 bus Id4
-Stazione salotto pilota termoconvettore salotto, termoconvettore letto, semnsori: DS18B20
+# Telegram Echo Bot
+
+This is a sample Telegram Bot written in PHP running on Heroku
