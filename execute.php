@@ -1,5 +1,5 @@
 <?php
-//11-01-2018
+//11-07-2018
 //started on 01-06-2017
 // La app di Heroku si puo richiamare da browser con
 //			https://salottozie.herokuapp.com/
@@ -94,7 +94,7 @@ else
 $parameters = array('chat_id' => $chatId, "text" => $response);
 $parameters["method"] = "sendMessage";
 // imposto la keyboard
-$parameters["reply_markup"] = '{ "keyboard": [["/on_on", "/son_boff"],["/soff_bon", "/off_off"],["/salotto","/verbose", "help"]], "one_time_keyboard": false}';
+$parameters["reply_markup"] = '{ "keyboard": [["/on_on", "/son_boff"],["/soff_bon", "/off_off"],["/salotto","/verbose", "help"]], "resize_keyboard": true, "one_time_keyboard": false}';
 // converto e stampo l'array JSON sulla response
 echo json_encode($parameters);
 ?>
