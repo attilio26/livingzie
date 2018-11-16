@@ -94,7 +94,7 @@ else
 $parameters = array('chat_id' => $chatId, "text" => $response);
 $parameters["method"] = "sendMessage";
 // imposto la keyboard
-$parameters["reply_markup"] = '{ "keyboard": [["/on_on", "/son_boff"],["/soff_bon", "/off_off"],["/salotto","/verbose", "help"]], "one_time_keyboard": false}';
+$parameters["reply_markup"] = '{ "keyboard": [["/on_on", "/son_boff"],["/soff_bon", "/off_off"],["/salotto","/verbose", "help"]], "one_time_keyboard": false, "resize_keyboard": true}';
 // converto e stampo l'array JSON sulla response
 echo json_encode($parameters);
 ?>
