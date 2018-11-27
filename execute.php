@@ -68,7 +68,7 @@ elseif($text=="/son_boff"){
 elseif($text=="/soff_bon"){
 	$response = file_get_contents("http://dario95.ddns.net:8083/rele/4/1");
 }
-elseif($text=="/off_off"){
+elseif(strpos($text,"/off_off")){
 	$response = file_get_contents("http://dario95.ddns.net:8083/rele/4/0");
 }
 //<-- Lettura parametri slave4
@@ -94,7 +94,7 @@ else
 $parameters = array('chat_id' => $chatId, "text" => $response);
 $parameters["method"] = "sendMessage";
 // imposto la keyboard
-$parameters["reply_markup"] = '{ "keyboard": [["/on_on", "/son_boff"],["/soff_bon", "/off_off"],["/salotto","/verbose", "help"]], "one_time_keyboard": false, "resize_keyboard": true}';
+$parameters["reply_markup"] = '{ "keyboard": [["/on_on", "/son_boff"],["/soff_bon", "/off_off \ud83d\udd35"],["/salotto","/verbose", "help"]], "one_time_keyboard": false, "resize_keyboard": true}';
 // converto e stampo l'array JSON sulla response
 echo json_encode($parameters);
 ?>
