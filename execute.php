@@ -68,7 +68,7 @@ elseif($text=="/son_boff"){
 elseif($text=="/soff_bon"){
 	$response = file_get_contents("http://dario95.ddns.net:8083/rele/4/1");
 }
-elseif(strpos($text,"/off_off")){
+elseif(strpos($text,"off_off")){
 	$response = file_get_contents("http://dario95.ddns.net:8083/rele/4/0");
 }
 //<-- Lettura parametri slave4
