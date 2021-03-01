@@ -80,22 +80,22 @@ if(strpos($text, "/start") === 0 || $text=="ciao" || $text == "help"){
 
 //<-- Comandi ai rele
 elseif(strpos($text,"bed_on")){
-	$resp = file_get_contents("http://192.168.4.18/?a=e");
+	$resp = file_get_contents("http://dario95.ddns.net:8083/?a=e");
 	$response = clean_html_page($resp);
 }
 elseif(strpos($text,"bed_off")){
-	$resp = file_get_contents("http://192.168.4.18/?a=f");
+	$resp = file_get_contents("http://dario95.ddns.net:8083/?a=f");
 	$response = clean_html_page($resp);
 }
 elseif(strpos($text,"liv_on")){
-	$response = file_get_contents("http://192.168.4.18/?a=c");
+	$response = file_get_contents("http://dario95.ddns.net:8083/?a=c");
 }
 elseif(strpos($text,"liv_off")){
-	$response = file_get_contents("http://192.168.4.18/?a=d");
+	$response = file_get_contents("http://dario95.ddns.net:8083/?a=d");
 }
 //<-- Lettura parametri slave4
 elseif(strpos($text,"salotto")){   
-	$response = file_get_contents("http://dario95.ddns.net:8083/salotto");
+	$response = file_get_contents("http://dario95.ddns.net:8083");
 }
 
 //<-- Manda a video la risposta completa
