@@ -1,5 +1,5 @@
 <?php
-//27-12-2018
+//01-03-2021
 //started on 01-06-2017
 // La app di Heroku si puo richiamare da browser con
 //			https://salottozie.herokuapp.com/
@@ -27,6 +27,26 @@ if(!$update)
   exit;
 }
 
+function clean_html_page($str_in){
+	$startch = strpos($str_in," <a href='?a=2'/> ") + 1 ;							//primo carattere utile da estrarre
+	$endch = strpos($str_in,"ter>powerd") -4;									//ultimo carattere utile da estrarre
+	$str_in = substr($str_in,$startch,$endch - $startch);				// substr(string,start,length)
+	//$str_in = str_replace("<a href='?a="," ",$str_in);
+	//$str_in = str_replace("r><h2>"," ",$str_in);
+	//$str_in = str_replace(" </a></h2><h2>"," ",$str_in);
+	//$str_in = str_replace("1'/>"," ",$str_in);
+	//$str_in = str_replace("2'/>"," ",$str_in);
+	//$str_in = str_replace("3'/>"," ",$str_in);
+	//$str_in = str_replace("4'/>"," ",$str_in);
+	//$str_in = str_replace("5'/>"," ",$str_in);
+	//$str_in = str_replace("6'/>"," ",$str_in);
+	//$str_in = str_replace("7'/>"," ",$str_in);	
+	//$str_in = str_replace("8'/>"," ",$str_in);
+	//$str_in = str_replace("9'/>"," ",$str_in);		
+	return $str_in;
+}
+
+
 $message = isset($update['message']) ? $update['message'] : "";
 $messageId = isset($message['message_id']) ? $message['message_id'] : "";
 $chatId = isset($message['chat']['id']) ? $message['chat']['id'] : "";
@@ -47,10 +67,10 @@ header("Content-Type: application/json");
 $response = '';
 $helptext = "List of commands :
 ---CONVETTORI--- 
-/on_on    -> Salotto ON  Letto ON
-/son_boff -> Salotto ON  Letto OFF  
-/soff_bon -> Salotto OFF Letto ON
-/off_off  -> Salotto OFF Letto OFF
+/bed_on   -> accendi convettore LETTO
+/bed_off  -> spegni convettore LETTO  
+/liv_on   -> accendi convettore salotto
+/liv_off  -> spegni convettore salotto
 /salotto  -> Lettura stazione4 ... su bus RS485
 ";
 
@@ -59,17 +79,19 @@ if(strpos($text, "/start") === 0 || $text=="ciao" || $text == "help"){
 }
 
 //<-- Comandi ai rele
-elseif(strpos($text,"on_on")){
-	$response = file_get_contents("http://dario95.ddns.net:8083/rele/4/3");
+elseif(strpos($text,"bed_on")){
+	$resp = file_get_contents("http://192.168.4.18/?a=e");
+	$response = clean_html_page($resp);
 }
-elseif($text=="/son_boff"){
-	$response = file_get_contents("http://dario95.ddns.net:8083/rele/4/2");
+elseif(strpos($text,"bed_off")){
+	$resp = file_get_contents("http://192.168.4.18/?a=f");
+	$response = clean_html_page($resp);
 }
-elseif($text=="/soff_bon"){
-	$response = file_get_contents("http://dario95.ddns.net:8083/rele/4/1");
+elseif(strpos($text,"liv_on")){
+	$response = file_get_contents("http://192.168.4.18/?a=c");
 }
-elseif(strpos($text,"off_off")){
-	$response = file_get_contents("http://dario95.ddns.net:8083/rele/4/0");
+elseif(strpos($text,"liv_off")){
+	$response = file_get_contents("http://192.168.4.18/?a=d");
 }
 //<-- Lettura parametri slave4
 elseif(strpos($text,"salotto")){   
@@ -94,7 +116,7 @@ else
 $parameters = array('chat_id' => $chatId, "text" => $response);
 $parameters["method"] = "sendMessage";
 // imposto la keyboard
-$parameters["reply_markup"] = '{ "keyboard": [["/on_on \ud83d\udd34", "/son_boff"],["/soff_bon", "/off_off \ud83d\udd35"],["/salotto \u2753"]], "one_time_keyboard": false, "resize_keyboard": true}';
+$parameters["reply_markup"] = '{ "keyboard": [["/bed_on \ud83d\udd34", "/bed_off \ud83d\udd35"],["/liv_on \ud83d\udd34", "/liv_off \ud83d\udd35"],["/salotto \u2753"]], "one_time_keyboard": false, "resize_keyboard": true}';
 // converto e stampo l'array JSON sulla response
 echo json_encode($parameters);
 ?>
