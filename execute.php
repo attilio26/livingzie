@@ -31,7 +31,7 @@ function clean_html_page($str_in){
 	$startch = strpos($str_in,"slaveID:")  ;							//primo carattere utile da estrarre
 	$endch = strpos($str_in,"<footer>") ;									//ultimo carattere utile da estrarre
 	$str_in = substr($str_in,$startch,$endch - $startch);				// substr(string,start,length)
-	$str_in = str_replace("<a href='?a="," ",$str_in);
+	//$str_in = str_replace("<a href='?a="," ",$str_in);
 	//$str_in = str_replace("r><h2>"," ",$str_in);
 	//$str_in = str_replace(" </a></h2><h2>"," ",$str_in);
 	//$str_in = str_replace("1'/>"," ",$str_in);
