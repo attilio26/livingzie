@@ -32,10 +32,10 @@ function clean_html_page($str_in){
 	$endch = strpos($str_in,"<footer>") ;									//ultimo carattere utile da estrarre
 	$str_in = substr($str_in,$startch,$endch - $startch);				// substr(string,start,length)
 	$str_in = str_replace("<a href='?a="," ",$str_in);
-	//$str_in = str_replace("<h2>"," ",$str_in);
-	//$str_in = str_replace("</h2>"," ",$str_in);
-	//$str_in = str_replace("<a>"," ",$str_in);
-	//$str_in = str_replace("</a>"," ",$str_in);	
+	$str_in = str_replace("<h2>"," ",$str_in);
+	$str_in = str_replace("</h2>"," ",$str_in);
+	$str_in = str_replace("<a>"," ",$str_in);
+	$str_in = str_replace("</a>"," ",$str_in);	
 	//$str_in = str_replace(" </a></h2><h2>"," ",$str_in);
 	//$str_in = str_replace("1'/>"," ",$str_in);
 	//$str_in = str_replace("2'/>"," ",$str_in);
@@ -91,14 +91,17 @@ elseif(strpos($text,"bed_off")){
 	$response = clean_html_page($resp);
 }
 elseif(strpos($text,"liv_on")){
-	$response = file_get_contents("http://dario95.ddns.net:8083/?a=c");
+	$resp = file_get_contents("http://dario95.ddns.net:8083/?a=c");
+	$response = clean_html_page($resp);	
 }
 elseif(strpos($text,"liv_off")){
-	$response = file_get_contents("http://dario95.ddns.net:8083/?a=d");
+	$resp = file_get_contents("http://dario95.ddns.net:8083/?a=d");
+	$response = clean_html_page($resp);
 }
 //<-- Lettura parametri slave4
 elseif(strpos($text,"salotto")){   
-	$response = file_get_contents("http://dario95.ddns.net:8083");
+	$resp = file_get_contents("http://dario95.ddns.net:8083");
+	$response = clean_html_page($resp);
 }
 
 //<-- Manda a video la risposta completa
