@@ -1,5 +1,5 @@
 <?php
-//02-03-2021
+//31-03-2021
 //started on 01-06-2017
 // La app di Heroku si puo richiamare da browser con
 //			https://salottozie.herokuapp.com/
@@ -28,27 +28,41 @@ if(!$update)
 }
 
 function clean_html_page($str_in){
-	$startch = strpos($str_in,"</header>") +9 ;							//primo carattere utile da estrarre
-	//$startch = strpos($str_in,"slaveID:") +1 ;							//primo carattere utile da estrarre
-	$endch = strpos($str_in,"<footer>") ;									//ultimo carattere utile da estrarre
-	$str_in = substr($str_in,$startch,$endch - $startch);				// substr(string,start,length)
+//elimino i caratteri html dalla pagina del wemos casa zie
+	$startch = strpos($str_in,"Uptime:") + 43 ;							//primo carattere utile da estrarre
+	$endch = strpos($str_in,"Tds1");					//ultimo carattere utile da estrarre
+	$str_in = substr($str_in, $startch, ($endch - $startch));				// substr(string,start,length)
 	$str_in = str_replace("<a href='?a="," ",$str_in);
-	$str_in = str_replace("<h2>"," ",$str_in);
-	$str_in = str_replace("</h2>"," ",$str_in);
-	$str_in = str_replace("<a>"," ",$str_in);
-	$str_in = str_replace("</a>"," ",$str_in);	
-	$str_in = str_replace("/>"," ",$str_in);	
-	$str_in = str_replace("<br>"," ",$str_in);		
-	//$str_in = str_replace(" </a></h2><h2>"," ",$str_in);
-	//$str_in = str_replace("1'/>"," ",$str_in);
-	//$str_in = str_replace("2'/>"," ",$str_in);
-	//$str_in = str_replace("3'/>"," ",$str_in);
-	//$str_in = str_replace("4'/>"," ",$str_in);
-	//$str_in = str_replace("5'/>"," ",$str_in);
-	//$str_in = str_replace("6'/>"," ",$str_in);
-	//$str_in = str_replace("7'/>"," ",$str_in);	
-	//$str_in = str_replace("8'/>"," ",$str_in);
-	//$str_in = str_replace("9'/>"," ",$str_in);		
+	$str_in = str_replace("<br>"," ",$str_in);
+	$str_in = str_replace(" </a></h2><h2>"," ",$str_in);
+	$str_in = str_replace("</a>"," -- ",$str_in);
+	$str_in = str_replace("4'/>"," ",$str_in);
+	$str_in = str_replace("5'/>"," ",$str_in);
+	$str_in = str_replace("6'/>"," ",$str_in);
+	$str_in = str_replace("7'/>"," ",$str_in);	
+	$str_in = str_replace("8'/>"," ",$str_in);
+	$str_in = str_replace("9'/>"," ",$str_in);
+	$str_in = str_replace("a'/>"," ",$str_in);	
+	$str_in = str_replace("b'/>"," ",$str_in);	
+	$str_in = str_replace("c'/>"," ",$str_in);	
+	$str_in = str_replace("d'/>"," ",$str_in);	
+	$str_in = str_replace("e'/>"," ",$str_in);	
+	$str_in = str_replace("f'/>"," ",$str_in);	
+	$str_in = str_replace("g'/>"," ",$str_in);	
+	$str_in = str_replace("h'/>"," ",$str_in);	
+	$str_in = str_replace("i'/>"," ",$str_in);	
+	$str_in = str_replace("l'/>"," ",$str_in);	
+	$str_in = str_replace("k'/>"," ",$str_in);		
+	$str_in = str_replace("m'/>"," ",$str_in);	
+	$str_in = str_replace("n'/>"," ",$str_in);
+	$str_in = str_replace("o'/>"," ",$str_in);	
+	$str_in = str_replace("p'/>"," ",$str_in);
+	$str_in = str_replace("q'/>"," ",$str_in);
+	$str_in = str_replace("<h2>"," ",$str_in);	
+//elimino i caratteri della pagina che non interessano la stazione bedzie
+	$startch = strpos($str_in,"slave4");
+	$endch = strpos($str_in,"slave3");	
+	$str_in = substr($str_in,$startch,($endch - $startch));
 	return $str_in;
 }
 
