@@ -1,5 +1,5 @@
 <?php
-//31-03-2021
+//02-04-2021
 //started on 01-06-2017
 // La app di Heroku si puo richiamare da browser con
 //			https://salottozie.herokuapp.com/
@@ -62,7 +62,7 @@ function clean_html_page($str_in){
 //elimino i caratteri della pagina che non interessano la stazione bedzie
 	$startch = strpos($str_in,"slave4");
 	$endch = strpos($str_in,"slave3");	
-	$str_in = substr($str_in,$startch,($endch - $startch));
+	//$str_in = substr($str_in,$startch,($endch - $startch));
 	return $str_in;
 }
 
